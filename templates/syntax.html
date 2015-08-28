@@ -1,0 +1,123 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap -->
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static',filename='prism.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static',filename='pythonchat.css') }}" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')  }}">
+{% endblock head %}
+
+{% block title %}PythonTutor Syntax Errors{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">Python Syntax Errors Visualizer</h1>
+    <hr/>
+    {{ main_content|safe }}
+    <hr/>
+    {% for obj in syntax_obj %}
+    <div id="code-{{ obj['_id'] }}" style="display: none">{{ obj['orig_code'] }}</div>
+    <div class="code_diff">
+        <p class="text-left" id="version-{{ obj['_id'] }}"><i>{{ obj['prog_lang'] }}</i></p>
+        {{ obj['diff'] | safe }}
+    </div>
+    <div class="programming_language">
+        <p class="text-right">
+        <a class="btn-toggle-code" uuid="{{ obj['_id'] }}">Show raw code (original)</a>
+        </p>
+    </div>
+    <!-- Raw code -->
+    <div id="raw-original-code-{{ obj['_id'] }}" style="display: none">
+        <pre><code id="raw-code-{{ obj['_id'] }}" class="language-python">{{ obj['orig_code'] }}</code></pre>
+    </div>
+
+    <!-- Leave an original raw code for reference -->
+    <div id="original-code-{{ obj['_id'] }}" style="display: none">{{ obj['orig_code'] }}</div>
+
+    <!-- Messages -->
+    <div class="alert alert-danger exception_msg">
+        <p><strong>Original Error Message: </strong>{{ obj['exception_msg'] }}</p>
+    </div>
+    <div class="alert alert-success reply">
+        <p><strong>Suggested: </strong> {{ obj['reply'] }}</p>
+    </div>
+    <!-- Parsing -->
+    <div class="programming_language">
+        <p class="text-right">
+        <a class="btn-toggle-parse" uuid="{{ obj['_id'] }}">Parse original code</a>
+        </p>
+    </div>    
+    <div id="parse-original-code-{{ obj['_id'] }}" style="display: none">
+        <pre id="parse-code-{{ obj['_id'] }}"></pre>
+        <br/><br/>
+        <div id="parse-code-trace-{{ obj['_id'] }}-buttons" class="row text-center">
+            <a class="btn btn-warning" id="btn-trace-previous-{{ obj['_id'] }}" uuid="{{ obj['_id'] }}"> Prev Step</a>
+            <a class="btn btn-warning" id="btn-trace-next-{{ obj['_id'] }}" uuid="{{ obj['_id'] }}"> Next Step </a>
+        </div>
+        <br/><br/>
+        <div class="row">
+            <!-- TODO Fix it -->
+            <!--<div id="parse-code-highlight-{{ obj['_id'] }}" class="col-md-6 parse-code-highlight-box"></div>-->
+            <div class="col-md-6"><pre><code id="code-formatted-box" class="line-numbers language-python">{{ obj['orig_code'] }}</code></pre></div>
+            <div id="parse-code-highlight-legend-{{ obj['_id'] }}" class="col-md-6"></div>
+        </div>
+        <br/><br/>
+        <!-- DEBUG:  JSON original element
+        <div class="row">
+            <div id="parse-code-trace-{{ obj['_id'] }}-left" class="col-md-6">
+                <pre id="parse-code-trace-{{ obj['_id'] }}-state"></pre>
+            </div>
+        </div>-->
+    </div>
+    <br />
+    <br /> 
+    <!-- Comments -->
+    <div class="form-group">
+        <label for="comment-{{ obj['_id'] }}">Comments</label>
+        <input type="text" class="form-control" id="comment-{{ obj['_id'] }}" placeholder="comments for this syntax error" value="{% if obj['comments'] %} {{ obj['comments'] }} {% endif %}" />
+    </div>
+    <div class="checkbox junk_mark" >
+      <label>
+        <input type="checkbox" id="checkbox-{{ obj['_id'] }}" 
+            {% if obj['junk'] == 'true' %}
+                {% print "checked='checked'" %}
+            {% endif %} /> Mark as junk
+      </label>
+    </div>
+    <div class="save button">
+        <!-- saving based on uuid + dt so the element is unique -->
+        <a class="btn btn-success" id="btn-save-comments" dt="{{ obj['dt'] }}" uuid="{{ obj['uuid'] }}">Save</a>
+    </div>
+    <hr/> 
+  {% endfor %}
+<!-- navigation buttons -->
+    <div class="buttons text-center">
+       <a class="btn-lg btn-primary" id="btn-syntax-prev" href="{{ url_for('syntax_page',uuid=buttons['prev'])}}">< Prev</a>
+       <a class="btn-lg btn-warning" id="btn-syntax-prev" href="{{ url_for('syntax_page',uuid=buttons['prev'])}}">Main Page</a>
+       <a class="btn-lg btn-primary" id="btn-syntax-next" href="{{ url_for('syntax_page',uuid=buttons['next'])}}">Next ></a>
+    </div>
+    <br /><br />
+</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='prism.min.js') }}"></script>
+    <script type=text/javascript>
+        function assert(condition,msg){
+        if (!condition){
+          alert(msg);
+          throw Error("Assertion failed");
+        }
+      }
+    </script>
+    <script type="text/javascript" src={{ url_for('.static', filename='pythonchat.js')}}></script>
+
+{% endblock %}

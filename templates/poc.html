@@ -1,0 +1,53 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap -->
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')  }}">
+{% endblock head %}
+
+{% block title %}Python Music Colors{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">Python Music Colors</h1>
+    <hr/>
+
+    <div id="notes" class="row">
+        {% for note,color,freq in colors %}
+        <!-- All natural notes (4) -->
+        <div class="col-md-1 col-xs-1">
+            <div class="text-center"><h4>{{ note }}</h4></div>
+            <div class="notes" style="background-color: {{ color }}"><br/><br/><br/></div>
+            <br/>
+            <div class="notes-button text-center">
+                <a class="btn btn-default" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' href="#">Play</a>
+            </div>
+            <br/><br/><br/>
+        </div>
+        {% endfor %} 
+    </div>
+    <hr/> 
+</div>
+<div id="colorLayer" style="position: absolute; height: 100vh; width: 100vw; display: none; top:0; left: 0; background-color: #000000;">C</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type=text/javascript>
+    function assert(condition,msg){
+        if (!condition){
+          alert(msg);
+          throw Error("Assertion failed");
+        }
+    }
+    </script>
+    <script src="{{ url_for('static',filename='riffwave.js') }}"></script>
+    <script src="{{ url_for('static',filename='notes.js') }}"></script>
+{% endblock %}

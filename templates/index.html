@@ -1,0 +1,30 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Python Music Colors Visualizer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">Python Music Colors</h1><hr/>
+    <hr/>
+  {{ main_content|safe }}
+</div>
+
+{% endblock %}
+
+{% block head %} 
+{{super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')  }}">
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+     <script type=text/javascript>
+        function assert(condition,msg){
+        if (!condition){
+          alert(msg);
+          throw Error("Assertion failed");
+        }
+      }
+    </script>
+{% endblock %}
