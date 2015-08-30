@@ -50,7 +50,7 @@ function play_tone(freq,color) {
 $(document).ready(function(){
 
 
-    $("a#btn-play").click(function(){
+    $("div#btn-play").click(function(){
         var btn = $(this);
         $('p#colorLayerText').text(btn.attr('note'));
         $('div#colorLayer').css('background-color',btn.attr('color'));

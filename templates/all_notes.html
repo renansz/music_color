@@ -21,11 +21,8 @@
         <!-- All natural notes (4) -->
         <div class="col-md-1 col-xs-1">
             <div class="text-center"><h4>{{ note }}</h4></div>
-            <div class="notes" style="background-color: {{ color }}"><br/><br/><br/></div>
             <br/>
-            <div class="notes-button text-center">
-                <a class="btn btn-default" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' href="#">Play</a>
-            </div>
+            <div class="notes" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' style="background-color: {{ color }}"><br/><br/><br/></div>
             <br/><br/><br/>
         </div>
         {% endfor %} 

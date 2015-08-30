@@ -52,14 +52,18 @@ def all_notes():
     """All colors/tones available for testing"""
     
     return render_template('all_notes.html',colors=music_color,)
-    #return response
 
 @app.route('/guess_notes')
 def guess_notes():
     """Guessing notes layout """
     
-    return render_template('guess_notes.html',colors=music_color,)
-    #return response
+    return render_template('guess_notes.html',colors=music_color,panel_content={})
+
+@app.route('/guess_colors')
+def guess_colors():
+    """Guessing notes layout """
+    
+    return render_template('guess_notes.html',colors=music_color,panel_content={})
 
 #=======================================================
 # Start the web service on the local host

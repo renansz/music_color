@@ -21,20 +21,20 @@
         <div id="notes" class="col-xs-6 cold-md-6">
             {% for note,color,freq in colors %}
             <!-- All natural notes (4) -->
-            <div class="col-md-1 col-xs-1">
-                <div class="text-center"><h4>{{ note }}</h4></div>
-                <div class="notes" style="background-color: {{ color }}"><br/><br/><br/></div>
-                <br/>
-                <div class="notes-button text-center">
-                    <a class="btn btn-default" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' href="#">Play</a>
-                </div>
-                <br/><br/><br/>
+            <div class="col-md-3 col-xs-3">
+                <div class="text-center"></div>
+                <div class="notes text-center" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' style="background-color: {{ color }}"><h4>{{ note }}</h4></div>
             </div>
             {% endfor %} 
         </div>
         <!-- Right panel -->
         <div id="notes" class="col-xs-6 cold-md-6">
-            Lorem ipsum blablablabla
+            <!-- this is where interactive panel goes
+            <br/><br/><br/>
+            <div class="col-xs-12 cold-md-12 text-center">
+                <a class="btn btn-lg btn-primary" href="#">Play Random Note</a>
+            </div>-->
+            {{ panel_content | safe }}
         </div>
     </div>
 

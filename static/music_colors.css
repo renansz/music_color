@@ -12,3 +12,15 @@ p#colorLayerText {
     font-size: 35vw;
     color: white;
 }
+
+div#btn-play {
+    height: 9vh;
+    width: 9vh;
+    color: white;
+    margin: 15% 0;
+}
+
+div#btn-play:hover {
+    cursor: pointer;
+    cursor: hand;
+}
