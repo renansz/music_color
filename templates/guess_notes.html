@@ -16,21 +16,29 @@
     <h1 align="center">Python Music Colors</h1>
     <hr/>
 
-    <div id="notes" class="row">
-        {% for note,color,freq in colors %}
-        <!-- All natural notes (4) -->
-        <div class="col-md-1 col-xs-1">
-            <div class="text-center"><h4>{{ note }}</h4></div>
-            <div class="notes" style="background-color: {{ color }}"><br/><br/><br/></div>
-            <br/>
-            <div class="notes-button text-center">
-                <a class="btn btn-default" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' href="#">Play</a>
+    <div id="guessing_panel" class="row">
+        <!-- Left panel -->
+        <div id="notes" class="col-xs-6 cold-md-6">
+            {% for note,color,freq in colors %}
+            <!-- All natural notes (4) -->
+            <div class="col-md-1 col-xs-1">
+                <div class="text-center"><h4>{{ note }}</h4></div>
+                <div class="notes" style="background-color: {{ color }}"><br/><br/><br/></div>
+                <br/>
+                <div class="notes-button text-center">
+                    <a class="btn btn-default" id="btn-play" color='{{ color }}' freq='{{ freq }}' note='{{ note }}' href="#">Play</a>
+                </div>
+                <br/><br/><br/>
             </div>
-            <br/><br/><br/>
+            {% endfor %} 
         </div>
-        {% endfor %} 
+        <!-- Right panel -->
+        <div id="notes" class="col-xs-6 cold-md-6">
+            Lorem ipsum blablablabla
+        </div>
     </div>
-    <hr/> 
+
+    <hr/>
 </div>
 <div id="colorLayer"><p id="colorLayerText" class="text-center"></p></div>
 

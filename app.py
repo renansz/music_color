@@ -45,14 +45,20 @@ music_color = [('C','#fa0a0c',261.63),('C#','#f44712',277.18),('D','#f78010',293
 #music_color = {'C':'fa0a0c','C#':'f44712','D':'f78010','D#':'f4d23b','E':'f5f43b','F':'149033','F#':'1b9081','G':'1c0d82','G#':'4b0e7d','A':'7f087c','A#':'a61586','B':'d71386'}
 
 #=======================================================
-# Main Page (all functionalities here)
+# Views 
 #=======================================================
-@app.route('/index')
-def index():
+@app.route('/all_notes')
+def all_notes():
     """All colors/tones available for testing"""
     
+    return render_template('all_notes.html',colors=music_color,)
+    #return response
+
+@app.route('/guess_notes')
+def guess_notes():
+    """Guessing notes layout """
     
-    return render_template('poc.html',colors=music_color,)
+    return render_template('guess_notes.html',colors=music_color,)
     #return response
 
 #=======================================================

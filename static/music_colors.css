@@ -1,0 +1,14 @@
+#colorLayer {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    top:0;
+    left: 0;
+    background-color: #000000;
+}
+
+p#colorLayerText {
+    font-size: 35vw;
+    color: white;
+}

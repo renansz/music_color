@@ -52,10 +52,11 @@ $(document).ready(function(){
 
     $("a#btn-play").click(function(){
         var btn = $(this);
+        $('p#colorLayerText').text(btn.attr('note'));
         $('div#colorLayer').css('background-color',btn.attr('color'));
-        $('div#colorLayer').show(0,function(){
+        $('div#colorLayer').fadeIn(400,function(){
             play_tone(btn.attr('freq'),btn.attr('color'));
-            $('div#colorLayer').delay(3000).hide(2000);
+            $('div#colorLayer').delay(1000).fadeOut(2000);
         });
     });
 
